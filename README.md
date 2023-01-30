@@ -16,14 +16,14 @@ https://bitbucket.org/devangel77b/libsbaprojs
 
 See HOWTO.md for details.
 
-### THIS HAS MOVED
-Please contact Brandon or Ty; the supported version is at [https://argus.web.unc.edu](https://argus.web.unc.edu)
+### New in version 1.6.8.1
+I think this now works for Python 3. The bitbucket repo is no longer reliably maintained; for the latest and greatest see  [https://argus.web.unc.edu](https://argus.web.unc.edu)
+
+I am no longer in academia because Jenelle Piepmeier and the Department of Weapons, Robotics, and Control Engineering at the US Naval Academy are religiously bigoted creationist nutjobs. 
 
 ### New in 1.6.8
 
 Dylan Ray updated some things to get it to play nicer with Python 3.
-
-
 
 ### Typical usage
 

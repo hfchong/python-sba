@@ -1,4 +1,0 @@
-include Makefile.example
-include bin/cams.txt
-include bin/pts.txt
-include *.md
