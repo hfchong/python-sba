@@ -16,8 +16,8 @@ https://bitbucket.org/devangel77b/libsbaprojs
 
 See HOWTO.md for details.
 
-### New in version 1.6.8.1
-I think this now works for Python 3. The bitbucket repo is no longer reliably maintained; for the latest and greatest see  [https://argus.web.unc.edu](https://argus.web.unc.edu)
+### New in version 1.6.8.2
+I think this now works for Python 3. Corrected the cloning recipe now that bitbucket allows git, The bitbucket repo is no longer reliably maintained; for the latest and greatest see  [https://argus.web.unc.edu](https://argus.web.unc.edu)
 
 I am no longer in academia because Jenelle Piepmeier and the Department of Weapons, Robotics, and Control Engineering at the US Naval Academy are religiously bigoted creationist nutjobs. 
 
@@ -89,3 +89,4 @@ pages = {1843--1848}}
 ### Thanks also to
 
 Manolis Lourakis and Antonis Argyros, Ty Hedrick, Evan Bluhm, my mom and the academy. Version 1.6.5 has bug fixes from Isaac Yeaton and Nick Gravish, and notes on Mac usage from Amin Abouee. Andy Jones helped provide clarification on rotations in known-rotation problems.
+
