@@ -17,7 +17,7 @@ https://bitbucket.org/devangel77b/libsbaprojs
 See HOWTO.md for details.
 
 ### THIS HAS MOVED
-Please contact Brandon or Ty; the supported version is at (https://argus.web.unc.edu)[https://argus.web.unc.edu]
+Please contact Brandon or Ty; the supported version is at [https://argus.web.unc.edu](https://argus.web.unc.edu)
 
 ### New in 1.6.8
 
