@@ -15,7 +15,7 @@ release = '1.6.8.2'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'sphinx.ext.duration',
+    #'sphinx.ext.duration',
     'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
 ]
