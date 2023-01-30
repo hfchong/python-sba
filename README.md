@@ -3,8 +3,8 @@
 
 Enjoy! The most recent version can be obtained from [bitbucket](https://bitbucket.org/devangel77b/python-sba) via https or ssh:
 ```
-hg clone https://bitbucket.org/devangel77b/python-sba
-hg clone ssh://hg@bitbucket.org/devangel77b/python-sba
+git clone https://devangel77b@bitbucket.org/devangel77b/python-sba.git
+git clone git@bitbucket.org:devangel77b/python-sba.git
 ```
 
 As **prerequisites**, you will also need to install the sba library as a shared object (libsba.so) (Makefile with shared object target included here) and the sba projections library (libsbaprojs.so):
