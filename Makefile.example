@@ -1,7 +1,24 @@
 #
-# Makefile for Sparse Bundle Adjustment library & demo program
+# Makefile for Sparse Bundle Adjustment library & demo program + add-ons for use
+# in Python.  Note that this makefile expects that the lapack and blas libraries
+# are available in the system path. Use this Makefile for building in Linux or MacOS
+# and Makefile.vc for building on Windows.
 #
+
+# Determine the operating system, default to unix
+OS = unix
+ifneq ($(shell uname -a | grep -i Darwin),)
+	OS = macOS
+endif
+ifneq ($(shell uname -a | grep -i Windows),)
+	OS = windows
+endif
+ifneq ($(shell uname -a | grep -i Linux),)
+	OS = linux
+endif
+
 CC=gcc
+#CC=clang
 #ARCHFLAGS=-march=pentium4 # YOU MIGHT WANT TO UNCOMMENT THIS FOR P4
 CFLAGS=$(ARCHFLAGS) -O3 -funroll-loops -Wall #-Wstrict-aliasing #-g -pg
 OBJS=sba_levmar.o sba_levmar_wrap.o sba_lapack.o sba_crsm.o sba_chkjac.o
@@ -10,24 +27,11 @@ AR=ar
 RANLIB=ranlib
 MAKE=make
 
-all: libsba.a dem
+all: libsba.a libsba.so libsbaprojs
 
 libsba.a: $(OBJS)
 	$(AR) crv libsba.a $(OBJS)
 	$(RANLIB) libsba.a
-
-libsba.so: 
-	$(CC) -fPIC -c sba.h sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c
-	$(CC) -shared -Wl -o libsba.so $(OBJS) -llapack -lblas
-
-install: 
-	@echo To install libsba.so, do the following as root:
-	@echo cp libsba.so /usr/local/lib/libsba.so.1.6.1
-	@echo chmod a-x /usr/local/lib/libsba.so.1.6.1
-	@echo rm /usr/local/lib/libsba.so
-	@echo ln -s /usr/local/lib/libsba.so.1.6.1 /usr/local/lib/libsba.so
-	@echo cp sba.h /usr/local/include/sba.h
-	@echo ldconfig
 
 sba_levmar.o: sba.h sba_chkjac.h compiler.h
 sba_levmar_wrap.o: sba.h
@@ -38,13 +42,37 @@ sba_chkjac.o: sba.h sba_chkjac.h compiler.h
 dem:
 	cd demo; $(MAKE)
 
+
+libsba.so:
+	@rm -f $(OBJS)
+ifeq ($(OS),macOS)
+	$(CC) -fPIC -c sba.h sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c $(CFLAGS) -target arm64-apple-macos11
+	$(CC) -shared -o libsba_a64.dylib $(OBJS) -framework Accelerate -target arm64-apple-macos11
+	$(CC) -fPIC -c sba.h sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c $(CFLAGS) -target x86_64-apple-macos10.6
+	$(CC) -shared -o libsba_x64.dylib $(OBJS) -framework Accelerate -target x86_64-apple-macos10.6
+	lipo -create -output libsba.dylib libsba_a64.dylib libsba_x64.dylib
+else
+	$(CC) -fPIC -c sba.h sba_levmar.c sba_levmar_wrap.c sba_lapack.c sba_crsm.c sba_chkjac.c $(CFLAGS)
+	$(CC) -shared -o libsba.so $(OBJS) -llapack -lblas
+endif
+
+
+libsbaprojs: libsba.so
+	cd libsbaprojs; $(MAKE)
+
 clean:
 	@rm -f $(OBJS)
+	@rm -f *dylib
 	cd demo; $(MAKE) clean
 	cd matlab; $(MAKE) clean
+	cd libsbaprojs; $(MAKE) clean
 
 realclean cleanall: clean
 	@rm -f libsba.a
+	@rm -f libsba.so
+	cd demo; $(MAKE) realclean
+	cd matlab; $(MAKE) realclean
+	cd libsbaprojs; $(MAKE) realclean
 
 depend:
 	makedepend -f Makefile $(SRCS)
