@@ -1,9 +1,20 @@
 #
 # Makefile for Sparse Bundle Adjustment library & demo program + add-ons for use
 # in Python.  Note that this makefile expects that the lapack and blas libraries
-# are available in the system path. Use this Makefile for building in Linux or MacOS
+# are available in the system path. Use this Makefile for building in Linux or macOS
 # and Makefile.vc for building on Windows.
 #
+
+# For macOS you'll also need to edit compiler.h as follows:
+#ifdef _MSC_VER
+#define SBA_FINITE _finite // MSVC
+#elif defined(__APPLE__)
+#define SBA_FINITE isfinite // macOS
+#elif defined(__ICC) || defined(__INTEL_COMPILER) || defined(__GNUC__)
+#define SBA_FINITE finite // ICC, GCC
+#else
+#define SBA_FINITE finite // other than MSVC, ICC, GCC, let's hope this will work
+#endif 
 
 # Determine the operating system, default to unix
 OS = unix
