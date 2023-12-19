@@ -60,7 +60,7 @@ def SparseBundleAdjust(cameras,points,
 
     # start timer here
     logging.debug("sba.SparseBundleAdjust starting timer and calling C")
-    info.t0 = time.clock()
+    info.t0 = time.process_time()
 
     # dispatcher
     if options.expert:
@@ -208,7 +208,7 @@ def SparseBundleAdjust(cameras,points,
         pass
     
     # stop timer here
-    info.tf = time.clock()
+    info.tf = time.process_time()
     logging.debug("sba.SparseBundleAdjust returned from C and stopped timer")
     
     if n == ERROR:
