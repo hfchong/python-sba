@@ -14,12 +14,11 @@ from sba.crsm import Crsm
 #from sba.options import Globs_
 from sba.errors import SbaError
 import sys
-import os
 
 
 if 'linux' in sys.platform:
     # This line actually loads the sba shared object from /usr/local/lib
-    _libsbaprojs = ctypes.CDLL(os.path.abspath("libsbaprojs.so"))
+    _libsbaprojs = ctypes.CDLL("/usr/local/lib/libsbaprojs.so")
     #print(os.path.abspath('libsbaprojs.so'))
     # On Ubuntu 12.04, this should be in /usr/local/lib/libsbaprojs.so as a link
     # to /usr/local/lib/libsbaprojs.so.1.6.4

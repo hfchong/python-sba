@@ -17,12 +17,11 @@ from sba.options import OPTS_SIZE
 from sba.info import INFO_SIZE
 import sba.options
 import sys
-import os
 
 
 if 'linux' in sys.platform:
     # This line actually loads the sba shared object
-    _libsba = ctypes.CDLL(os.path.abspath("libsba.so"))
+    _libsba = ctypes.CDLL("/usr/local/lib/libsba.so")
     # On Ubuntu 12.04 this is /usr/local/lib/libsba.so, which is a symbolic link
     # to /usr/local/lib/libsba.so.1.6.4 currently
 
@@ -39,7 +38,6 @@ elif sys.platform == 'win32' or sys.platform == 'win64':
         _libsba = ctypes.CDLL("libsba.dll")
     except:
         _libsba = ctypes.CDLL("libsba_p3.dll")
-    # THIS MAY NEED DEBUGGING
 
 # "expert" drivers from sba.h (BU modified version 1.6.1)
 # function prototype for sba_motstr_levmar_x
