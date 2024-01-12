@@ -17,7 +17,7 @@ class Points(object):
         self.__n = self.__B.shape[0]
         self.__ncon = ncon
         self.__pnp = self.__B.shape[1]
-        assert self.__pn == 3
+        assert self.__pnp == 3
 
         self.__X = np.array(X, dtype=np.double)
         self.__ncameras = self.__X.shape[1]
