@@ -117,9 +117,8 @@ q0 is carried around here. ?!?
             # combine(compose) rotations by quaternion rotation
             qresult = qlocal.mul(qinitial)
             result = qresult.asVector()
-            
-            # Lourakis likes positive vectors i guess?
-            self.camarray[cam,-6:-3] = np.copysign(result[1:],result[0])
+
+            self.camarray[cam, -6:-3] = result[1:]
 
     def Aravel(self):
         """
