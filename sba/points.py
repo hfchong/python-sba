@@ -12,9 +12,10 @@ import numpy as np
 
 
 class Points(object):
-    def __init__(self, B, X, vmask):
+    def __init__(self, B, X, vmask, ncon):
         self.__B = np.array(B, dtype=np.double)
         self.__n = self.__B.shape[0]
+        self.__ncon = ncon
         self.__pnp = self.__B.shape[1]
         assert self.__pn == 3
 
@@ -73,6 +74,11 @@ class Points(object):
     def n(self):
         """n - number of points"""
         return self.__n
+
+    @property
+    def ncon(self):
+        """ncon - number of points which should not be modified"""
+        return self.__ncon
 
     @property
     def pnp(self):
@@ -155,18 +161,27 @@ class Points(object):
         vmask = np.zeros((npoints, ncameras), dtype=np.byte)
 
         pt = 0
+        ncon = 0  # number of points (starting from the 1st) which should not be modified
+        max_nvisible = 0
         with open(ptsfile, "r", encoding="utf-8") as ifile:
             for line in ifile:
                 if line[0] != "#":
                     splitted = line.split()
                     nvisible = int(float(splitted[3]))
+                    if nvisible == 1 and max_nvisible > 1:
+                        raise ValueError(
+                            "World coordinates with only one observation should be listed first in the file"
+                        )
+                    max_nvisible = max(max_nvisible, nvisible)
+                    if nvisible == 1:
+                        ncon += 1
                     for a in range(nvisible):
                         cam = int(float(splitted[3 + 1 + a * 3]))
                         x[pt, cam, 0] = float(splitted[3 + 2 + a*3])
                         x[pt, cam, 1] = float(splitted[3 + 3 + a*3])
                         vmask[pt, cam] = 1
                     pt += 1
-        result = cls(b, x, vmask)
+        result = cls(b, x, vmask, ncon)
         return result
     fromTxt = classmethod(_fromTxt)
 
