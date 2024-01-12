@@ -75,7 +75,7 @@ def SparseBundleAdjust(cameras,points,
             print(("all x {0}".format(newX)))
             print(("length x {0}".format(len(newX))))
             n = routine(ctypes.c_int(points.n), #const int
-                        ctypes.c_int(0), #const int
+                        ctypes.c_int(points.ncon), #const int
                         ctypes.c_int(cameras.ncameras), # const int
                         ctypes.c_int(0), #const int
                         points.vmaskToC(),
@@ -118,7 +118,7 @@ def SparseBundleAdjust(cameras,points,
             options.camparams = cameras.Aravel()
             newX = points.XtoC()
             n = routine(ctypes.c_int(points.n),
-                        ctypes.c_int(0),
+                        ctypes.c_int(points.ncon),
                         ctypes.c_int(cameras.ncameras),
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
@@ -143,7 +143,7 @@ def SparseBundleAdjust(cameras,points,
             P = np.hstack((cameras.Aravel(),points.Bravel())).copy()
             newX = points.XtoC() # Have to do this to get back numpy array
             n = routine(ctypes.c_int(points.n), #const int
-                        ctypes.c_int(0), #const int
+                        ctypes.c_int(points.ncon), #const int
                         ctypes.c_int(cameras.ncameras), # const int
                         ctypes.c_int(0), #const int
                         points.vmaskToC(),
@@ -187,7 +187,7 @@ def SparseBundleAdjust(cameras,points,
             options.camparams = cameras.Aravel()
             newX = points.XtoC()
             n = routine(ctypes.c_int(points.n),
-                        ctypes.c_int(0),
+                        ctypes.c_int(points.ncon),
                         ctypes.c_int(cameras.ncameras),
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
