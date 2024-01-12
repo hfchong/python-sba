@@ -77,7 +77,7 @@ def SparseBundleAdjust(cameras,points,
             n = routine(ctypes.c_int(points.n), #const int
                         ctypes.c_int(points.ncon), #const int
                         ctypes.c_int(cameras.ncameras), # const int
-                        ctypes.c_int(0), #const int
+                        ctypes.c_int(cameras.mcon), #const int
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
                         ctypes.c_int(options.cnp), # const int
@@ -99,7 +99,7 @@ def SparseBundleAdjust(cameras,points,
             newX = points.XtoC()
             n = routine(ctypes.c_int(points.n),
                         ctypes.c_int(cameras.ncameras),
-                        ctypes.c_int(0),
+                        ctypes.c_int(cameras.mcon),
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
                         ctypes.c_int(options.cnp),
@@ -145,7 +145,7 @@ def SparseBundleAdjust(cameras,points,
             n = routine(ctypes.c_int(points.n), #const int
                         ctypes.c_int(points.ncon), #const int
                         ctypes.c_int(cameras.ncameras), # const int
-                        ctypes.c_int(0), #const int
+                        ctypes.c_int(cameras.mcon), #const int
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
                         ctypes.c_int(options.cnp), # const int
@@ -167,7 +167,7 @@ def SparseBundleAdjust(cameras,points,
             newX = points.XtoC()
             n = routine(ctypes.c_int(points.n),
                         ctypes.c_int(cameras.ncameras),
-                        ctypes.c_int(0),
+                        ctypes.c_int(cameras.mcon),
                         points.vmaskToC(),
                         P.ctypes.data_as(ctypes.POINTER(ctypes.c_double)),
                         ctypes.c_int(options.cnp),

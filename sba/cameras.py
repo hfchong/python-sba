@@ -39,12 +39,13 @@ class Cameras(object):
     The class can be asked for the array, the raveled array, 
     the number of cameras (ncameras) and the parameters for one camera (cnp).
     """
-    def __init__(self,camarray=None):
+    def __init__(self, camarray=None, mcon=0):
         if camarray is None:
             self.__camarray = np.zeros((0,0),dtype=np.double)
         else:
             self.__camarray = np.array(camarray,dtype=np.double)
         self.__ncameras = self.__camarray.shape[0]
+        self.__mcon = mcon
         self.__cnp = self.__camarray.shape[1]
         self.__rot0params = np.zeros((self.__ncameras,4),dtype=np.double)
 
@@ -83,6 +84,10 @@ q0 is carried around here. ?!?
     def _getcnp(self):
         return self.__cnp
     cnp = property(_getcnp,doc="cnp = number of parameters for 1 camera")
+    
+    @property
+    def mcon(self):
+        return self.__mcon
     
     @property
     def hasFixedIntrinsics(self):
