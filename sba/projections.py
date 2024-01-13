@@ -294,8 +294,8 @@ _libsbaprojs.img_projsKDS_x.argtypes = [ctypes.POINTER(ctypes.c_double),
 _libsbaprojs.img_projsKDS_x.restype = None
 _libsbaprojs.img_projsKDS_x.__str__ = "StructureExpert_Cameras"
 # Python handle
-_StructureExpert_NoCameras = _libsbaprojs.img_projsKDS_x
-_StructureExpert_NoCameras.__doc__="""
+_StructureExpert_Cameras = _libsbaprojs.img_projsKDS_x
+_StructureExpert_Cameras.__doc__="""
 Function prototype for callable projection func in expert mode sba:
 void (*func) (double *p, struct sba_crsm *idxij, int *rcidxs, 
 int *rcsubs, double *hx, void *adata)
