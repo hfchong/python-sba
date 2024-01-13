@@ -113,7 +113,7 @@ q0 is carried around here. ?!?
         in cases that allow camera motion."""
         for cam in range(self.ncameras):
             v = self.camarray[cam,-6:-3] # retrieve vector part from self
-            v0 = 1-np.sqrt(v[0]**2.+v[1]**2.+v[2]**2) # compute v0
+            v0 = np.sqrt(1 - v[0]**2. - v[1]**2. - v[2]**2) # compute v0
 
             # turn it into quaternions
             qlocal = quaternions.Quaternion(v0,v[0],v[1],v[2])
