@@ -233,7 +233,7 @@ def SparseBundleAdjust(cameras,points,
         newcameras.combineLocalAndInitialRotation(options.rot0params) # combine local rotation estimates with initial ones
 
     elif options.motstruct==sba.options.OPTS_STRUCT:
-        newpoints.B = P.reshape(options.n,options.pnp) # unload B structure params only
+        newpoints.B = P.reshape(newpoints.n,options.pnp) # unload B structure params only
 
     else:
         raise sba.errors.SbaError("Unrecognized option for howto: {0}".format(options.motstruct))
